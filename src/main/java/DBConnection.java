@@ -1,8 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 2 on 28.06.2018.
@@ -14,6 +12,7 @@ public class DBConnection {
     private static final String DB_PASSWORD = "g2222n";
 
     List<Product> productList = new ArrayList<>();
+    ;
 
     private Connection getDBConnection() {
         Connection dbConnection = null;

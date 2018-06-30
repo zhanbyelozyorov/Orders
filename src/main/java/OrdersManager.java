@@ -4,9 +4,7 @@ import java.util.*;
  * Created by 2 on 28.06.2018.
  */
 public class OrdersManager {
-    DBConnection dbConnection = new DBConnection();
-    List<Order> ordrs;
-
+    DBConnection dbConnection;
 
     public void startMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -17,6 +15,7 @@ public class OrdersManager {
                     "\n      3 - get all products by quantity;" +
                     "\n      0 - exit;");
             choosing = scanner.nextInt();
+            dbConnection = new DBConnection();
 
             switch (choosing) {
                 case 1:
@@ -29,9 +28,7 @@ public class OrdersManager {
                     selectAllProducts();
                     break;
             }
-
         } while (choosing != 0);
-
     }
 
     private void selectOrdersProducts() {
