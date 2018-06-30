@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="orders@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="orders">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="books"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="test"/>
+    <table id="8" parent="2" name="orderproducts"/>
+    <table id="9" parent="2" name="orders"/>
+    <table id="10" parent="2" name="product"/>
+    <column id="11" parent="8" name="orderid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="12" parent="8" name="productquantity">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="13" parent="8" name="productid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="14" parent="8" name="orderproducts_orderid_fk">
+      <ColNames>orderid</ColNames>
+    </index>
+    <index id="15" parent="8" name="orderproducts_productid__fk">
+      <ColNames>productid</ColNames>
+    </index>
+    <foreign-key id="16" parent="8" name="orderproducts_orderid_fk">
+      <ColNames>orderid</ColNames>
+      <RefSchemaName>orders</RefSchemaName>
+      <RefTableName>orders</RefTableName>
+      <RefColNames>orderid</RefColNames>
+    </foreign-key>
+    <foreign-key id="17" parent="8" name="orderproducts_productid__fk">
+      <ColNames>productid</ColNames>
+      <RefSchemaName>orders</RefSchemaName>
+      <RefTableName>product</RefTableName>
+      <RefColNames>productid</RefColNames>
+    </foreign-key>
+    <column id="18" parent="9" name="orderid">
+      <Position>1</Position>
+      <DataType>int(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="19" parent="9" name="description">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="20" parent="9" name="PRIMARY">
+      <ColNames>orderid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="21" parent="10" name="productid">
+      <Position>1</Position>
+      <DataType>int(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="22" parent="10" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="10" name="price">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="24" parent="10" name="PRIMARY">
+      <ColNames>productid</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
