@@ -31,12 +31,12 @@ public class DBConnection {
     public List<Product> getOrdersProducts() {
         try (Connection connection = getDBConnection(); Statement statement = connection.createStatement()) {
 
-            String query = "SELECT product.productid, product.name, product.price, orderproducts.productquantity," +
+            String queryGetOrdersProducts = "SELECT product.productid, product.name, product.price, orderproducts.productquantity," +
                     "orderproducts.orderid  FROM product, orderproducts " +
                     "WHERE product.productid=orderproducts.productid  " +
                     "ORDER BY orderproducts.orderid";
 
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery(queryGetOrdersProducts);
             int count = 1;
             while (rs.next()) {
                 int orderNum = rs.getInt("orderid");
@@ -55,9 +55,9 @@ public class DBConnection {
 
     public List<Product> getUnsoldProducts() {
         try (Connection connection = getDBConnection(); Statement statement = connection.createStatement()) {
-            String query = "SELECT * FROM product LEFT JOIN orderproducts " +
+            String querygetUnsoldProducts = "SELECT * FROM product LEFT JOIN orderproducts " +
                     "ON product.productid=orderproducts.productid WHERE orderproducts.productid IS NULL";
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery(querygetUnsoldProducts);
             while (rs.next()) {
                 int productid = rs.getInt("productid");
                 String name = rs.getString("name");
@@ -74,11 +74,11 @@ public class DBConnection {
     public List<Product> getAllProducts() {
         try (Connection connection = getDBConnection(); Statement statement = connection.createStatement()) {
 
-            String query = "SELECT product.productid, product.name, product.price, orderproducts.productquantity " +
+            String querygetUnsoldProductsByQuantity = "SELECT product.productid, product.name, product.price, orderproducts.productquantity " +
                     "FROM product, orderproducts WHERE product.productid=orderproducts.productid " +
                     "ORDER BY orderproducts.productquantity DESC";
 
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery(querygetUnsoldProductsByQuantity);
             while (rs.next()) {
                 int productid = rs.getInt("productid");
                 String name = rs.getString("name");
