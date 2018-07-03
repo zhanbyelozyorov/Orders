@@ -4,11 +4,11 @@
 public class Product {
     int productId;
     String name;
-    double price;
-    double quantity = 0;
+    int price;
+    int quantity = 0;
     int orderid;
 
-    public Product(int productId, String name, double price, double quantity, int orderid) {
+    public Product(int productId, String name, int price, int quantity, int orderid) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -16,13 +16,13 @@ public class Product {
         this.orderid = orderid;
     }
 
-    public Product(int productId, String name, double price) {
+    public Product(int productId, String name, int price) {
         this.productId = productId;
         this.name = name;
         this.price = price;
     }
 
-    public Product(int productId, String name, double price, double quantity) {
+    public Product(int productId, String name, int price, int quantity) {
         this.productId = productId;
         this.name = name;
         this.price = price;

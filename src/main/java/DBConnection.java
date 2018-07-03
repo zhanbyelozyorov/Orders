@@ -42,8 +42,8 @@ public class DBConnection {
                 int orderNum = rs.getInt("orderid");
                 int productid = rs.getInt("productid");
                 String name = rs.getString("name");
-                double price = rs.getDouble("price");
-                double quantity = rs.getDouble("productquantity");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("productquantity");
 
                 productList.add(new Product(productid, name, price, quantity, orderNum));
             }
@@ -61,7 +61,7 @@ public class DBConnection {
             while (rs.next()) {
                 int productid = rs.getInt("productid");
                 String name = rs.getString("name");
-                double price = rs.getDouble("price");
+                int price = rs.getInt("price");
 
                 productList.add(new Product(productid, name, price));
             }
@@ -74,28 +74,26 @@ public class DBConnection {
     public List<Product> getAllProducts() {
         try (Connection connection = getDBConnection(); Statement statement = connection.createStatement()) {
 
-            String querygetUnsoldProductsByQuantity = "SELECT product.productid, product.name, product.price, orderproducts.productquantity " +
-                    "FROM product, orderproducts WHERE product.productid=orderproducts.productid " +
-                    "ORDER BY orderproducts.productquantity DESC";
+            String querygetAllProductsByQuantity = "SELECT product.productid, product.name, product.price, SUM(orderproducts.productquantity) AS total FROM product INNER JOIN orderproducts ON product.productid=orderproducts.productid   GROUP BY product.name ORDER BY orderproducts.productquantity DESC";
 
-            ResultSet rs = statement.executeQuery(querygetUnsoldProductsByQuantity);
+            ResultSet rs = statement.executeQuery(querygetAllProductsByQuantity);
             while (rs.next()) {
                 int productid = rs.getInt("productid");
                 String name = rs.getString("name");
-                double price = rs.getDouble("price");
-                double quantity = rs.getDouble("productquantity");
-                boolean flag = true;
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("total");
+//                boolean flag = true;
 
-                for (int i = 0; i < productList.size(); i++) {
-                    if (productList.get(i).name.equals(name)) {
-                        productList.set(i, new Product(productid, name, price, quantity + productList.get(i).quantity));
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag) {
+//                for (int i = 0; i < productList.size(); i++) {
+//                    if (productList.get(i).name.equals(name)) {
+//                        productList.set(i, new Product(productid, name, price, quantity + productList.get(i).quantity));
+//                        flag = false;
+//                        break;
+//                    }
+//                }
+//                if (flag) {
                     productList.add(new Product(productid, name, price, quantity));
-                }
+//                }
             }
             getUnsoldProducts();
         } catch (SQLException e) {
